@@ -20,7 +20,7 @@ if [ "$RUN_UNIT_TEST_WITH_IOS_SIM" = "YES" ]; then
     /usr/local/bin/ios-sim launch $test_host_dir $environment_args --args -SenTest All -ApplePersistenceIgnoreState YES -NSTreatUnknownArgumentsAsOpen NO $test_bundle_path 2>&1 | sed -E 's/^\[DEBUG\][ \t]*//g' | tee ${test_logfile}
         
     # Test the log output for test case failure. If this line is present, exit 1
-    if egrep -2 "\[FAILED\]" ${test_logfile}
+    if egrep "Test Case '-\[[[:alnum:]]+[[:space:]][[:alnum:]]+\]' failed" ${test_logfile}
         then
         echo "A test failed."
         exit 1
